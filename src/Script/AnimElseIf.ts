@@ -47,8 +47,8 @@ export function SetAnimName(Type){
   else if(Type == 24){
     return("IconPlanetarium")
   }
-  else if(Type == 29){
-    return("IconUltraSecretRoom")
-  }
+  // else if(Type == 29){
+  //   return("IconUltraSecretRoom")
+  // }
   else{return(0)}
 }
