@@ -1,4 +1,4 @@
-export function ModConfig(configHB) {
+export function ModConfig(configRA) {
   if (ModConfigMenu !== undefined) {
     ModConfigMenu.RemoveCategory("RemembrAll!");
 
@@ -12,63 +12,64 @@ export function ModConfig(configHB) {
     ModConfigMenu.AddSpace("RemembrAll!", "About");
 
     ModConfigMenu.AddSetting("RemembrAll!", `Mains`, {
-      CurrentSetting: (): number => configHB.Mode,
+      CurrentSetting: (): number => configRA.spoil,
       Maximum: 2,
-      Minimum: 1,
+      Minimum: 0,
       Display() {
-        let onOff = "All projectile";
-        if (configHB.Mode == 2) {
-          onOff = "Only curved";
+        let onOff = "Spoil";
+        if (configRA.spoil == 1) {
+          onOff = "No spoil";
+        }
+        if (configRA.spoil == 2) {
+          onOff = "Real no spoil";
         }
         return `Mode: ${onOff}`;
       },
-      Info: [],
+      Info: [`spoil: all icons are displayed, NoSpoil: all icons but "hidden", RealNoSpoil: Hidden until discovered`],
       OnChange: (currentValue: number | boolean | undefined): void => {
-        configHB.Mode = currentValue as number;
+        configRA.spoil = currentValue as number;
       },
       Type: ModConfigMenuOptionType.NUMBER,
     });
 
-    ModConfigMenu.AddSetting("RemembrAll!", `Mains`, {
-      Type: ModConfigMenuOptionType.BOOLEAN,
-      CurrentSetting() {
-        return configHB.Player;
-      },
-      Display() {
-        let onOff = "Disabled";
-        if (configHB.Player == true) {
-          onOff = "Enabled";
-        }
-        return `Player: ${onOff}`;
-      },
-      OnChange(IsOn) {
-        configHB.Player = IsOn as boolean;
-      },
-      Info: [`displays the player's hitbox`],
-    });
+    // ModConfigMenu.AddSetting("RemembrAll!", `Mains`, {
+    //   Type: ModConfigMenuOptionType.BOOLEAN,
+    //   CurrentSetting() {
+    //     return configRA.Player;
+    //   },
+    //   Display() {
+    //     let onOff = "Disabled";
+    //     if (configRA.Player == true) {
+    //       onOff = "Enabled";
+    //     }
+    //     return `Player: ${onOff}`;
+    //   },
+    //   OnChange(IsOn) {
+    //     configRA.Player = IsOn as boolean;
+    //   },
+    //   Info: [`displays the player's hitbox`],
+    // });
 
     function addItem(entity, type, name, desc) {
       ModConfigMenu.AddSetting("RemembrAll!", `${type}`, {
         Type: ModConfigMenuOptionType.BOOLEAN,
         CurrentSetting() {
-          return configHB[entity];
+          return configRA[entity];
         },
         Display() {
           let onOff = "Disabled";
-          if (configHB[entity] == true) {
+          if (configRA[entity] == true) {
             onOff = "Enabled";
           }
           return `${name}: ${onOff}`;
         },
         OnChange(IsOn) {
-          configHB[entity] = IsOn as boolean;
+          configRA[entity] = IsOn as boolean;
         },
         Info: [`${desc}`],
       });
     }
-    addItem("CDPriority", "Mains", "ComingDown! priority", "If you have 'Coming down!' should the mod prioritize the coming down effect? ");
-    addItem("ChangeColor", "Mains", "Change Color", "The colors of the projectiles change according to the height. Green if too high to hit you. ");
-
+    addItem("HideVisited", "Mains", "Hide Visited", "Hides the icons of the visited rooms, instead of changing the opacity");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
     ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "Hello World");
