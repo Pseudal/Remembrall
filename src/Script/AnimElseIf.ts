@@ -1,4 +1,6 @@
-export function SetAnimName(Type){
+//import { printConsole } from "isaacscript-common";
+declare const TaintedTreasure: unknown | undefined;
+export function SetAnimName(Type, Variant){
   if(Type == 2){
     return("IconShop")
   }
@@ -42,6 +44,10 @@ export function SetAnimName(Type){
     return("IconChestRoom")
   }
   else if(Type == 21){
+    if(TaintedTreasure !== undefined){
+      if(Variant > 12000 && Variant < TaintedTreasure.maxvariant)
+      return("Tainted")
+    }
     return("IconDiceRoom")
   }
   else if(Type == 24){

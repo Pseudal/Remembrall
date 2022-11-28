@@ -1,11 +1,12 @@
 import { ModCallback } from "isaac-typescript-definitions";
 import { printConsole } from "isaacscript-common";
+import * as json from "json";
 import { SetAnimName } from "./Script/AnimElseIf";
 import { configRA } from "./Script/Config";
-import * as json from "json";
 import { ModConfig } from "./Script/MCM";
 const MOD_NAME = "remembrall";
 let RoomArray = [];
+let fortuneSpawned = 0
 let Icon = Sprite();
 Icon.Load("gfx/ui/RA_icons.anm2", true);
 Icon.Scale = Vector(1.5, 1.5);
@@ -70,14 +71,60 @@ function DisplayIcon() {
 }
 
 function CheckRoom() {
+  CheckTrapdoor();
   if (RoomArray.length > 0) {
     for (let index = 0; index < RoomArray.length; index++) {
       const e = RoomArray[index];
       if (e.Room.VisitedCount > 0) {
-        if(configRA.HideVisited == false){
-          e.Opacity = 0.25
-        }else{
+        if (configRA.HideVisited == false) {
+          e.Opacity = 0.25;
+        } else {
           RoomArray.splice(index, 1);
+        }
+      }
+    }
+  }
+}
+
+function CheckTrapdoor() {
+  let room = Game().GetRoom();
+  let num = room.GetGridSize();
+  if (num > 0) {
+    for (let index = 0; index < num; index++) {
+      if (room.GetGridEntity(index) !== undefined) {
+        let element = room.GetGridEntity(index);
+        if (element.GetSaveState().Type == 17 && fortuneSpawned == 0) {
+          if (configRA.spoil == 2) {
+            let count = 0;
+            RoomArray.forEach((element) => {
+              printConsole("coucou")
+              if (
+                (element.Room.DisplayFlags == 5 ||
+                element.Room.DisplayFlags == 3 )&&
+                element.Room.VisitedCount == 0
+              ) {
+                count += 1;
+              }
+            });
+            if (count > 0) {
+              Game().GetHUD().ShowFortuneText("RemembrAll",`${count} rooms not visited`);
+            } else {
+              Game().GetHUD().ShowFortuneText("RemembrAll",`404 info not found`);
+            }
+          } else {
+            let count = 0;
+            RoomArray.forEach((element) => {
+              if (element.Room.VisitedCount == 0) {
+                count += 1;
+              }
+            });
+            if (count !== 0) {
+              Game().GetHUD().ShowFortuneText("RemembrAll",`${count} rooms not visited`);
+            } else {
+              Game().GetHUD().ShowFortuneText("RemembrAll",`YAY, all rooms have been visited`);
+            }
+          }
+          fortuneSpawned = 1;
         }
       }
     }
@@ -90,7 +137,7 @@ function GetAllRooms() {
   for (let index = 0; index < GetRooms.Size; index++) {
     const Room = GetRooms.Get(index);
     if (Room.Data.Type !== 1) {
-      printConsole(`${Room.Data.Type} ${Room.DisplayFlags}`);
+      printConsole(`${Room.Data.Type} ${Room.DisplayFlags} ${Room.Data.Variant}`);
       let RoomObj = {
         Room: Room,
         Visited: false,
@@ -99,7 +146,7 @@ function GetAllRooms() {
         Type: Room.Data.Type,
         Opacity:0.75
       };
-      RoomObj.Animation = SetAnimName(Room.Data.Type);
+      RoomObj.Animation = SetAnimName(Room.Data.Type, Room.Data.Variant);
       if (RoomObj.Animation == 0) {
         continue;
       }
@@ -145,6 +192,6 @@ function main() {
   mod.AddCallback(ModCallback.POST_NEW_LEVEL, GetAllRooms);
   mod.AddCallback(ModCallback.POST_RENDER, DisplayIcon);
   mod.AddCallback(ModCallback.POST_UPDATE, CheckRoom);
-
+  mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {fortuneSpawned = 0});
   // Print a message to the "log.txt" file.
 }
