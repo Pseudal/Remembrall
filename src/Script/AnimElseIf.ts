@@ -1,6 +1,7 @@
-//import { printConsole } from "isaacscript-common";
+import { printConsole } from "isaacscript-common";
 declare const TaintedTreasure: unknown | undefined;
 export function SetAnimName(Type, Variant){
+  //printConsole(`${Type}`)
   if(Type == 2){
     return("IconShop")
   }
