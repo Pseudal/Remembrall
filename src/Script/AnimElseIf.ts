@@ -1,6 +1,6 @@
 import { printConsole } from "isaacscript-common";
 declare const TaintedTreasure: unknown | undefined;
-export function SetAnimName(Type, Variant){
+export function SetAnimName(Type, Variant, Subtype){
   //printConsole(`${Type}`)
   if(Type == 2){
     return("IconShop")
@@ -53,6 +53,12 @@ export function SetAnimName(Type, Variant){
   }
   else if(Type == 24){
     return("IconPlanetarium")
+  }
+  else if(Type == 1 && Subtype == 34){
+    return("IconMirrorRoom")
+  }
+  else if(Type == 1 && Subtype == 10){
+    return("IconMinecartRoom")
   }
   // else if(Type == 29){
   //   return("IconUltraSecretRoom")

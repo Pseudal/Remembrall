@@ -1,4 +1,4 @@
 export let configRA = {
-  spoil:2,
+  spoil:0,
   HideVisited: false
 }
