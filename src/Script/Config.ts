@@ -1,4 +1,22 @@
 export let configRA = {
   spoil:0,
-  HideVisited: false
+  HideVisited: false,
+  Fortune:true,
+  //rooms
+  Knife: true,
+  Shop: true,
+  Treasure: true,
+  Mini: true,
+  Secret: true,
+  SuperSecret: true,
+  Arcade: true,
+  Curse: true,
+  Ambush: true,
+  Library: true,
+  Chests:true,
+  Dice: true,
+  Planetarium: true,
+  Tainted: true,
+  Ultra:false,
+  Sacrifice: true,
 }

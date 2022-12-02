@@ -115,103 +115,105 @@ function CheckRoom() {
 }
 
 function CheckTrapdoor() {
-  let room = Game().GetRoom();
-  let num = room.GetGridSize();
-  if (num > 0) {
-    for (let index = 0; index < num; index++) {
-      if (room.GetGridEntity(index) !== undefined) {
-        let element = room.GetGridEntity(index);
-        if (element.GetSaveState().Type == 17 && fortuneSpawned == 0) {
-          let knife = 0;
+  if(configRA.Fortune == true){
+    let room = Game().GetRoom();
+    let num = room.GetGridSize();
+    if (num > 0) {
+      for (let index = 0; index < num; index++) {
+        if (room.GetGridEntity(index) !== undefined) {
+          let element = room.GetGridEntity(index);
+          if (element.GetSaveState().Type == 17 && fortuneSpawned == 0) {
+            let knife = 0;
 
-          if (
-            (Isaac.GetPlayer().HasCollectible(626) == false &&
-              Game().GetLevel().GetStage() == 2 &&
-              Game().GetLevel().GetStageType() == 4) ||
-            (Isaac.GetPlayer().HasCollectible(627) == false &&
-              Game().GetLevel().GetStage() == 4 &&
-              Game().GetLevel().GetStageType() == 4)
-          ) {
-            knife = 1;
-          }
+            if (
+              (Isaac.GetPlayer().HasCollectible(626) == false &&
+                Game().GetLevel().GetStage() == 2 &&
+                Game().GetLevel().GetStageType() == 4) ||
+              (Isaac.GetPlayer().HasCollectible(627) == false &&
+                Game().GetLevel().GetStage() == 4 &&
+                Game().GetLevel().GetStageType() == 4)
+            ) {
+              knife = 1;
+            }
 
-          if (configRA.spoil == 2) {
-            let count = 0;
-            RoomArray.forEach((element) => {
-              if (
-                (element.Room.DisplayFlags == 5 ||
-                  element.Room.DisplayFlags == 3) &&
-                element.Room.VisitedCount == 0
-              ) {
-                count += 1;
+            if (configRA.spoil == 2) {
+              let count = 0;
+              RoomArray.forEach((element) => {
+                if (
+                  (element.Room.DisplayFlags == 5 ||
+                    element.Room.DisplayFlags == 3) &&
+                  element.Room.VisitedCount == 0
+                ) {
+                  count += 1;
+                }
+              });
+              if (count > 0) {
+                if (knife == 1 && configRA.Knife == true)
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText(
+                      "RemembrAll",
+                      `${count} rooms not visited,`,
+                      "A piece of knife was left behind",
+                    );
+                else
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText("RemembrAll", `${count} rooms not visited`);
+              } else {
+                if (knife == 1 && configRA.Knife == true)
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText(
+                      "RemembrAll",
+                      `404 info not found`,
+                      "A piece of knife was left behind",
+                    );
+                else
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText("RemembrAll", `404 info not found`);
               }
-            });
-            if (count > 0) {
-              if (knife == 1)
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText(
-                    "RemembrAll",
-                    `${count} rooms not visited,`,
-                    "A piece of knife was left behind",
-                  );
-              else
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText("RemembrAll", `${count} rooms not visited`);
             } else {
-              if (knife == 1)
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText(
-                    "RemembrAll",
-                    `404 info not found`,
-                    "A piece of knife was left behind",
-                  );
-              else
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText("RemembrAll", `404 info not found`);
-            }
-          } else {
-            let count = 0;
-            RoomArray.forEach((element) => {
-              if (element.Room.VisitedCount == 0) {
-                count += 1;
+              let count = 0;
+              RoomArray.forEach((element) => {
+                if (element.Room.VisitedCount == 0) {
+                  count += 1;
+                }
+              });
+              if (count !== 0) {
+                if (knife == 1 && configRA.Knife == true)
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText(
+                      "RemembrAll",
+                      `${count} rooms not visited`,
+                      "A piece of knife was left behind",
+                    );
+                else
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText("RemembrAll", `${count} rooms not visited`);
+              } else {
+                if (knife == 1 && configRA.Knife == true)
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText(
+                      "RemembrAll",
+                      `YAY, all special rooms have been visited`,
+                      "A piece of knife was left behind",
+                    );
+                else
+                  Game()
+                    .GetHUD()
+                    .ShowFortuneText(
+                      "RemembrAll",
+                      `YAY, all rooms have been visited`,
+                    );
               }
-            });
-            if (count !== 0) {
-              if (knife == 1)
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText(
-                    "RemembrAll",
-                    `${count} rooms not visited`,
-                    "A piece of knife was left behind",
-                  );
-              else
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText("RemembrAll", `${count} rooms not visited`);
-            } else {
-              if (knife == 1)
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText(
-                    "RemembrAll",
-                    `YAY, all special rooms have been visited`,
-                    "A piece of knife was left behind",
-                  );
-              else
-                Game()
-                  .GetHUD()
-                  .ShowFortuneText(
-                    "RemembrAll",
-                    `YAY, all rooms have been visited`,
-                  );
             }
+            fortuneSpawned = 1;
           }
-          fortuneSpawned = 1;
         }
       }
     }
@@ -253,6 +255,7 @@ function GetAllRooms() {
         Room.Data.Type,
         Room.Data.Variant,
         Room.Data.Subtype,
+        configRA
       );
       if (RoomObj.Animation == 0) {
         continue;

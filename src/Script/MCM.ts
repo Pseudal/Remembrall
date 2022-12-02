@@ -70,6 +70,23 @@ export function ModConfig(configRA) {
       });
     }
     addItem("HideVisited", "Mains", "Hide Visited", "Hides the icons of the visited rooms, instead of changing the opacity");
+    addItem("Fortune", "Mains", "Fortune", "Displays a fortune with the objectives/rooms missed");
+    addItem("Knife", "Rooms", "Knife", "Enable Knife Room detection");
+    addItem("Shop", "Rooms", "Shop", "Enable Shop Room detection");
+    addItem("Treasure", "Rooms", "Treasure", "Enable Treasure Room detection");
+    addItem("Mini", "Rooms", "MiniBoss", "Enable MiniBoss Room detection");
+    addItem("Secret", "Rooms", "Secret", "Enable Secret Room detection");
+    addItem("SuperSecret", "Rooms", "SuperSecret", "Enable SuperSecret Room detection");
+    addItem("Arcade", "Rooms", "Arcade", "Enable Arcade Room detection");
+    addItem("Curse", "Rooms", "Curse", "Enable Curse Room detection");
+    addItem("Ambush", "Rooms", "Ambush", "Enable Ambush Room detection");
+    addItem("Library", "Rooms", "Library", "Enable Library Room detection");
+    addItem("Chests", "Rooms", "Chests", "Enable Chests Room detection");
+    addItem("Dice", "Rooms", "Dice", "Enable Dice Room detection");
+    addItem("Planetarium", "Rooms", "Planetarium", "Enable Planetarium Room detection");
+    addItem("Sacrifice", "Rooms", "Sacrifice", "Enable Sacrifice Room detection");
+    addItem("Ultra", "Rooms", "UltraSecret", "Enable UltraSecret Room detection");
+    addItem("Tainted", "Rooms", "Tainted", "Enable Tainted Room detection");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
     ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "Hello World");
