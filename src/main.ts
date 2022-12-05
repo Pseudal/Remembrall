@@ -13,12 +13,15 @@ Icon.Load("gfx/ui/RA_icons.anm2", true);
 Icon.Scale = Vector(1.5, 1.5);
 main();
 function DisplayIcon() {
+  if(configRA.Disable == true){
+    return
+  }
   let posY = 200;
   let Rooms = [];
   if (configRA.spoil == 2) {
     for (let index = 0; index < RoomArray.length; index++) {
       const ThisRoom = RoomArray[index];
-      if (ThisRoom.Room.DisplayFlags == 5 || ThisRoom.Room.DisplayFlags == 3) {
+      if ((ThisRoom.Room.DisplayFlags == 5 || ThisRoom.Room.DisplayFlags == 3) || ThisRoom.Room.Type == 1) {
         Rooms.push(ThisRoom);
       }
     }
@@ -44,7 +47,8 @@ function DisplayIcon() {
               ((ThisRoom.Type == 7 ||
                 (ThisRoom.Type == 8 && ThisRoom.Type !== 29)) &&
                 ThisRoom.Room.DisplayFlags !== 3)) &&
-            configRA.spoil == 1
+            configRA.spoil == 1 &&
+            ThisRoom.Type !== 1
           ) {
             Icon.SetFrame("CurseI", 1);
           } else {
@@ -62,7 +66,8 @@ function DisplayIcon() {
               ((ThisRoom.Type == 7 ||
                 (ThisRoom.Type == 8 && ThisRoom.Type !== 29)) &&
                 ThisRoom.Room.DisplayFlags !== 3)) &&
-            configRA.spoil == 1
+            configRA.spoil == 1 &&
+            ThisRoom.Type !== 1
           ) {
             Icon.SetFrame("CurseI", 1);
           } else {
@@ -166,13 +171,13 @@ function CheckTrapdoor() {
                     .GetHUD()
                     .ShowFortuneText(
                       "RemembrAll",
-                      `404 info not found`,
+                      `Unknown`,
                       "A piece of knife was left behind",
                     );
                 else
                   Game()
                     .GetHUD()
-                    .ShowFortuneText("RemembrAll", `404 info not found`);
+                    .ShowFortuneText("RemembrAll", `Unknown`);
               }
             } else {
               let count = 0;
@@ -200,7 +205,7 @@ function CheckTrapdoor() {
                     .GetHUD()
                     .ShowFortuneText(
                       "RemembrAll",
-                      `YAY, all special rooms have been visited`,
+                      `All special rooms have been visited`,
                       "A piece of knife was left behind",
                     );
                 else
@@ -208,7 +213,7 @@ function CheckTrapdoor() {
                     .GetHUD()
                     .ShowFortuneText(
                       "RemembrAll",
-                      `YAY, all rooms have been visited`,
+                      `All rooms have been visited`,
                     );
               }
             }
@@ -240,7 +245,7 @@ function GetAllRooms() {
         continue;
       }
       // printConsole(
-      //   `${Room.Data.Type} ${Room.SafeGridIndex} ${Room.Data.Weight}`,
+      //   `${Room.Data.Variant} `,
       // );
 
       let RoomObj = {
@@ -315,22 +320,22 @@ function main() {
   mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {
     fortuneSpawned = 0;
   });
-  mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {
-    let GetRooms = Game().GetLevel().GetRooms();
-    let SpecialRooms = [];
-    for (let index = 0; index < GetRooms.Size; index++) {
-      const Room = GetRooms.Get(index);
-      if (Room.Data.Type !== 1) {
-        printConsole(
-          `${Room.Data.Type} ${Room.DisplayFlags} ${Room.Data.Variant}`,
-        );
-      }
-    }
-    printConsole(
-      `${Game().GetLevel().GetCurrentRoomDesc().Data.Type} ${
-        Game().GetLevel().GetCurrentRoomDesc().Data.Subtype
-      }`,
-    );
-  });
+  // mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {
+  //   let GetRooms = Game().GetLevel().GetRooms();
+  //   let SpecialRooms = [];
+  //   for (let index = 0; index < GetRooms.Size; index++) {
+  //     const Room = GetRooms.Get(index);
+  //     if (Room.Data.Type !== 1) {
+  //       printConsole(
+  //         `${Room.Data.Type} ${Room.Data.Subtype} ${Room.Data.Variant}`,
+  //       );
+  //     }
+  //   }
+  //   printConsole(
+  //     `${Game().GetLevel().GetCurrentRoomDesc().Data.Type} ${
+  //       Game().GetLevel().GetCurrentRoomDesc().Data.Subtype
+  //     }`,
+  //   );
+  // });
   // Print a message to the "log.txt" file.
 }

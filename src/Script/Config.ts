@@ -1,5 +1,6 @@
 export let configRA = {
   spoil:0,
+  Disable:false,
   HideVisited: false,
   Fortune:true,
   //rooms

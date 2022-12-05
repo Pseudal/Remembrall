@@ -70,6 +70,7 @@ export function ModConfig(configRA) {
       });
     }
     addItem("HideVisited", "Mains", "Hide Visited", "Hides the icons of the visited rooms, instead of changing the opacity");
+    addItem("Disable", "Mains", "Disable icons", "Hide icons");
     addItem("Fortune", "Mains", "Fortune", "Displays a fortune with the objectives/rooms missed");
     addItem("Knife", "Rooms", "Knife", "Enable Knife Room detection");
     addItem("Shop", "Rooms", "Shop", "Enable Shop Room detection");

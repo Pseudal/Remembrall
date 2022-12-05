@@ -48,6 +48,9 @@ export function SetAnimName(Type, Variant, Subtype, config){
     if(config.Ambush == false){
       return(0)
     }
+    if(Subtype == 1){
+      return("IconBossAmbushRoom")
+    }
     return("IconAmbushRoom")
   }
   else if(Type == 12){
@@ -80,7 +83,7 @@ export function SetAnimName(Type, Variant, Subtype, config){
     return("IconChestRoom")
   }
   if(TaintedTreasure !== undefined){
-    if(Type == 21 &&( Variant > 12000 && Variant < TaintedTreasure.maxvariant)){
+    if(Type == 21 && ( Variant > 12000 && Variant < TaintedTreasure.maxvariant)){
       if(config.Tainted == false){
         return(0)
       }

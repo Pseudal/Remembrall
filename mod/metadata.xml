@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <metadata>
-  <name>remembrall</name>
-  <directory>remembrall</directory>
-  <description>remembrall is a currently a work in progress.</description>
-  <version>1.0</version>
+  <name>RemembrAll</name>
+  <directory>RemembrAll</directory>
+  <description>RRememberAll Adds icons indicating remaining rooms to visit and objectives to complete, to avoid forgetting them.
+
+    I highly recommend installing [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2487535818]Mod Config Menu - Continued[/url] to enable/disable rooms and other options
+    [img]https://i.imgur.com/UHABsZv.gif[/img]
+
+    This mod is compatible with Tainted rooms
+
+    Should be compatible with any mod that changes sprites or adds custom rooms.
+
+    Created with the [url=https://isaacscript.github.io]IsaacScript[/url] framework,
+
+    The development of this mod is temporarily slowed down, I'll be back soon.
+
+    Translated with www.DeepL.com/Translator (free version)</description>
+  <version>0.5</version>
   <visibility />
 </metadata>
