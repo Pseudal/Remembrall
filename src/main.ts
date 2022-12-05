@@ -13,6 +13,7 @@ Icon.Load("gfx/ui/RA_icons.anm2", true);
 Icon.Scale = Vector(1.5, 1.5);
 main();
 function DisplayIcon() {
+  let Hud = Options.HUDOffset
   if(configRA.Disable == true){
     return
   }
@@ -55,7 +56,7 @@ function DisplayIcon() {
             Icon.SetFrame(ThisRoom.Animation, 1);
           }
           Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
-          Icon.Render(Vector(16, posY), Vector(0, 0), Vector(0, 0));
+          Icon.Render(Vector(Hud*20+16, posY+(Hud*12)), Vector(0, 0), Vector(0, 0));
           posY += 15;
         } else {
           if (
@@ -74,7 +75,7 @@ function DisplayIcon() {
             Icon.SetFrame(ThisRoom.Animation, 1);
           }
           Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
-          Icon.Render(Vector(0, posY), Vector(0, 0), Vector(0, 0));
+          Icon.Render(Vector(Hud*20, posY+(Hud*12)), Vector(0, 0), Vector(0, 0));
         }
       }
     }
