@@ -5,7 +5,7 @@ export function ModConfig(configRA) {
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!","About",() => "RemembrAll!",);
     ModConfigMenu.AddSpace("RemembrAll!", "About");
-    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.8.2`);
+    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.8.5`);
 
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!", "About", () => "Mod made by Tidloas with love");
@@ -90,6 +90,9 @@ export function ModConfig(configRA) {
     addItem("Tainted", "Rooms", "Tainted", "Enable Tainted Room detection");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "The position of the icons should now be managed by HUDOffset");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "I changed the display of the icons, for");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "a better compatibility with the coop");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "and double character");
+
   }
 }

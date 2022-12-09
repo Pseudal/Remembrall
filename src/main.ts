@@ -10,14 +10,14 @@ let fortuneSpawned = 0;
 let Icon = Sprite();
 let ArrayCheck = [];
 Icon.Load("gfx/ui/RA_icons.anm2", true);
-Icon.Scale = Vector(1.5, 1.5);
+Icon.Scale = Vector(1.6, 1.6);
 main();
 function DisplayIcon() {
   let Hud = Options.HUDOffset
   if(configRA.Disable == true){
     return
   }
-  let posY = 200;
+  let posX = 0;
   let Rooms = [];
   if (configRA.spoil == 2) {
     for (let index = 0; index < RoomArray.length; index++) {
@@ -29,7 +29,6 @@ function DisplayIcon() {
   } else {
     Rooms = RoomArray;
   }
-
   if (Rooms.length > 0) {
     for (let index = 0; index < Rooms.length; index++) {
       const ThisRoom = Rooms[index];
@@ -39,7 +38,6 @@ function DisplayIcon() {
           (ThisRoom.Room.Data.Subtype == 34 ||
             ThisRoom.Room.Data.Subtype == 10))
       ) {
-        if (index % 2 == 1) {
           if (
             ((ThisRoom.Type !== 7 &&
               ThisRoom.Type !== 8 &&
@@ -56,27 +54,8 @@ function DisplayIcon() {
             Icon.SetFrame(ThisRoom.Animation, 1);
           }
           Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
-          Icon.Render(Vector(Hud*20+16, posY+(Hud*12)), Vector(0, 0), Vector(0, 0));
-          posY += 15;
-        } else {
-          if (
-            ((ThisRoom.Type !== 7 &&
-              ThisRoom.Type !== 8 &&
-              ThisRoom.Type !== 29 &&
-              ThisRoom.Room.DisplayFlags !== 5) ||
-              ((ThisRoom.Type == 7 ||
-                (ThisRoom.Type == 8 && ThisRoom.Type !== 29)) &&
-                ThisRoom.Room.DisplayFlags !== 3)) &&
-            configRA.spoil == 1 &&
-            ThisRoom.Type !== 1
-          ) {
-            Icon.SetFrame("CurseI", 1);
-          } else {
-            Icon.SetFrame(ThisRoom.Animation, 1);
-          }
-          Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
-          Icon.Render(Vector(Hud*20, posY+(Hud*12)), Vector(0, 0), Vector(0, 0));
-        }
+          Icon.Render(Vector((Hud*20)+posX,Isaac.GetScreenHeight()-20), Vector(0, 0), Vector(0, 0));
+          posX += 15
       }
     }
   }
@@ -320,6 +299,7 @@ function main() {
   mod.AddCallback(ModCallback.POST_UPDATE, CheckRoom);
   mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {
     fortuneSpawned = 0;
+
   });
   // mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {
   //   let GetRooms = Game().GetLevel().GetRooms();
