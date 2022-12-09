@@ -10,14 +10,16 @@ let fortuneSpawned = 0;
 let Icon = Sprite();
 let ArrayCheck = [];
 Icon.Load("gfx/ui/RA_icons.anm2", true);
-Icon.Scale = Vector(1.6, 1.6);
+Icon.Scale = Vector(1.5, 1.5);
 main();
 function DisplayIcon() {
-  let Hud = Options.HUDOffset
   if(configRA.Disable == true){
     return
   }
-  let posX = 0;
+  let posX = configRA.Position;
+  if(posX<50 && Isaac.GetPlayer().HasTrinket(0) == false){
+    posX = 50;
+  }
   let Rooms = [];
   if (configRA.spoil == 2) {
     for (let index = 0; index < RoomArray.length; index++) {
@@ -54,7 +56,11 @@ function DisplayIcon() {
             Icon.SetFrame(ThisRoom.Animation, 1);
           }
           Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
-          Icon.Render(Vector((Hud*20)+posX,Isaac.GetScreenHeight()-20), Vector(0, 0), Vector(0, 0));
+          if(configRA.PositionTop == false){
+            Icon.Render(Vector(posX,(Isaac.GetScreenHeight()-20)), Vector(0, 0), Vector(0, 0));
+          }else{
+            Icon.Render(Vector(posX,(0)), Vector(0, 0), Vector(0, 0));
+          }
           posX += 15
       }
     }

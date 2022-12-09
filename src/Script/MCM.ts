@@ -5,7 +5,7 @@ export function ModConfig(configRA) {
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!","About",() => "RemembrAll!",);
     ModConfigMenu.AddSpace("RemembrAll!", "About");
-    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.8.5`);
+    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.9`);
 
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!", "About", () => "Mod made by Tidloas with love");
@@ -31,6 +31,22 @@ export function ModConfig(configRA) {
       },
       Type: ModConfigMenuOptionType.NUMBER,
     });
+
+    ModConfigMenu.AddSetting("RemembrAll!", `Mains`, {
+      CurrentSetting: (): number => configRA.Position,
+      Maximum: 512,
+      Minimum: 0,
+      Display() {
+        let onOff = configRA.Position;
+        return `Position-X: ${onOff}`;
+      },
+      Info: [``],
+      OnChange: (currentValue: number | boolean | undefined): void => {
+        configRA.Position = currentValue as number;
+      },
+      Type: ModConfigMenuOptionType.NUMBER,
+    });
+
 
     // ModConfigMenu.AddSetting("RemembrAll!", `Mains`, {
     //   Type: ModConfigMenuOptionType.BOOLEAN,
@@ -69,6 +85,7 @@ export function ModConfig(configRA) {
         Info: [`${desc}`],
       });
     }
+    addItem("PositionTop", "Mains", "Position Top", "Place the icons at the top of the screen");
     addItem("HideVisited", "Mains", "Hide Visited", "Hides the icons of the visited rooms, instead of changing the opacity");
     addItem("Disable", "Mains", "Disable icons", "Hide icons");
     addItem("Fortune", "Mains", "Fortune", "Displays a fortune with the objectives/rooms missed");
@@ -90,9 +107,8 @@ export function ModConfig(configRA) {
     addItem("Tainted", "Rooms", "Tainted", "Enable Tainted Room detection");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "I changed the display of the icons, for");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "a better compatibility with the coop");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "and double character");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "it is now possible to roughly change,");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "the position of the icons");
 
   }
 }

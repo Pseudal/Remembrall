@@ -20,4 +20,6 @@ export let configRA = {
   Tainted: true,
   Ultra:false,
   Sacrifice: true,
+  Position:50,
+  PositionTop:false
 }
