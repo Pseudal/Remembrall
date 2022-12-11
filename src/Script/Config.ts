@@ -1,0 +1,26 @@
+export let configRA = {
+  spoil:0,
+  Disable:false,
+  HideVisited: false,
+  Fortune:true,
+  Old:false,
+  //rooms
+  Knife: true,
+  Shop: true,
+  Treasure: true,
+  Mini: true,
+  Secret: true,
+  SuperSecret: true,
+  Arcade: true,
+  Curse: true,
+  Ambush: true,
+  Library: true,
+  Chests:true,
+  Dice: true,
+  Planetarium: true,
+  Tainted: true,
+  Ultra:false,
+  Sacrifice: true,
+  Position:50,
+  PositionTop:false
+}
