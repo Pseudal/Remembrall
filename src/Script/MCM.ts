@@ -5,7 +5,7 @@ export function ModConfig(configRA) {
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!","About",() => "RemembrAll!",);
     ModConfigMenu.AddSpace("RemembrAll!", "About");
-    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.9`);
+    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.9.5`);
 
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!", "About", () => "Mod made by Tidloas with love");
@@ -86,6 +86,7 @@ export function ModConfig(configRA) {
       });
     }
     addItem("PositionTop", "Mains", "Position Top", "Place the icons at the top of the screen");
+    addItem("Old", "Mains", "Original layout", "Changes the layout of the icons vertically, as originally");
     addItem("HideVisited", "Mains", "Hide Visited", "Hides the icons of the visited rooms, instead of changing the opacity");
     addItem("Disable", "Mains", "Disable icons", "Hide icons");
     addItem("Fortune", "Mains", "Fortune", "Displays a fortune with the objectives/rooms missed");
@@ -107,8 +108,7 @@ export function ModConfig(configRA) {
     addItem("Tainted", "Rooms", "Tainted", "Enable Tainted Room detection");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "it is now possible to roughly change,");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "the position of the icons");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "Added an option to change the layout to vertical, as before.");
 
   }
 }

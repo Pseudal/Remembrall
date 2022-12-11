@@ -3,6 +3,7 @@ export let configRA = {
   Disable:false,
   HideVisited: false,
   Fortune:true,
+  Old:false,
   //rooms
   Knife: true,
   Shop: true,

@@ -1,5 +1,4 @@
 import { ModCallback } from "isaac-typescript-definitions";
-import { printConsole } from "isaacscript-common";
 import * as json from "json";
 import { SetAnimName } from "./Script/AnimElseIf";
 import { configRA } from "./Script/Config";
@@ -11,20 +10,28 @@ let Icon = Sprite();
 let ArrayCheck = [];
 Icon.Load("gfx/ui/RA_icons.anm2", true);
 Icon.Scale = Vector(1.5, 1.5);
+
 main();
 function DisplayIcon() {
-  if(configRA.Disable == true){
-    return
-  }
   let posX = configRA.Position;
-  if(posX<50 && Isaac.GetPlayer().HasTrinket(0) == false){
+  let posY = 200;
+  let Rooms = [];
+  let Hud = Options.HUDOffset;
+
+  if (configRA.Disable == true) {
+    return;
+  }
+  if (posX < 50 && Isaac.GetPlayer().HasTrinket(0) == false) {
     posX = 50;
   }
-  let Rooms = [];
   if (configRA.spoil == 2) {
     for (let index = 0; index < RoomArray.length; index++) {
       const ThisRoom = RoomArray[index];
-      if ((ThisRoom.Room.DisplayFlags == 5 || ThisRoom.Room.DisplayFlags == 3) || ThisRoom.Room.Type == 1) {
+      if (
+        ThisRoom.Room.DisplayFlags == 5 ||
+        ThisRoom.Room.DisplayFlags == 3 ||
+        ThisRoom.Room.Type == 1
+      ) {
         Rooms.push(ThisRoom);
       }
     }
@@ -40,28 +47,49 @@ function DisplayIcon() {
           (ThisRoom.Room.Data.Subtype == 34 ||
             ThisRoom.Room.Data.Subtype == 10))
       ) {
-          if (
-            ((ThisRoom.Type !== 7 &&
-              ThisRoom.Type !== 8 &&
-              ThisRoom.Type !== 29 &&
-              ThisRoom.Room.DisplayFlags !== 5) ||
-              ((ThisRoom.Type == 7 ||
-                (ThisRoom.Type == 8 && ThisRoom.Type !== 29)) &&
-                ThisRoom.Room.DisplayFlags !== 3)) &&
-            configRA.spoil == 1 &&
-            ThisRoom.Type !== 1
-          ) {
-            Icon.SetFrame("CurseI", 1);
+        if (
+          ((ThisRoom.Type !== 7 &&
+            ThisRoom.Type !== 8 &&
+            ThisRoom.Type !== 29 &&
+            ThisRoom.Room.DisplayFlags !== 5) ||
+            ((ThisRoom.Type == 7 ||
+              (ThisRoom.Type == 8 && ThisRoom.Type !== 29)) &&
+              ThisRoom.Room.DisplayFlags !== 3)) &&
+          configRA.spoil == 1 &&
+          ThisRoom.Type !== 1
+        ) {
+          Icon.SetFrame("CurseI", 1);
+        } else {
+          Icon.SetFrame(ThisRoom.Animation, 1);
+        }
+        Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
+        if (configRA.Old == false) {
+          if (configRA.PositionTop == false) {
+            Icon.Render(
+              Vector(posX, Isaac.GetScreenHeight() - 20),
+              Vector(0, 0),
+              Vector(0, 0),
+            );
           } else {
-            Icon.SetFrame(ThisRoom.Animation, 1);
+            Icon.Render(Vector(posX, 0), Vector(0, 0), Vector(0, 0));
           }
-          Icon.Color = Color(1, 1, 1, ThisRoom.Opacity);
-          if(configRA.PositionTop == false){
-            Icon.Render(Vector(posX,(Isaac.GetScreenHeight()-20)), Vector(0, 0), Vector(0, 0));
-          }else{
-            Icon.Render(Vector(posX,(0)), Vector(0, 0), Vector(0, 0));
+          posX += 15;
+        } else {
+          if (index % 2 == 1) {
+            Icon.Render(
+              Vector(Hud * 20 + 15, posY + Hud * 12),
+              Vector(0, 0),
+              Vector(0, 0),
+            );
+            posY += 15;
+          } else {
+            Icon.Render(
+              Vector(Hud * 20, posY + Hud * 12),
+              Vector(0, 0),
+              Vector(0, 0),
+            );
           }
-          posX += 15
+        }
       }
     }
   }
