@@ -3,7 +3,6 @@ import * as json from "json";
 import { SetAnimName } from "./Script/AnimElseIf";
 import { configRA } from "./Script/Config";
 import { ModConfig } from "./Script/MCM";
-const MOD_NAME = "remembrall";
 let RoomArray = [];
 let fortuneSpawned = 0;
 let Icon = Sprite();
@@ -300,7 +299,7 @@ function CheckSafeIndex(room: RoomDescriptor, test) {
 function main() {
   // Instantiate a new mod object, which grants the ability to add callback functions that
   // correspond to in-game events.
-  const mod = RegisterMod(MOD_NAME, 1);
+  const mod = RegisterMod("remembrall", 1);
 
   function postGameStarted() {
     if (mod.HasData()) {
