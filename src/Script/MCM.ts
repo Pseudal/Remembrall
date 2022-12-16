@@ -5,7 +5,7 @@ export function ModConfig(configRA) {
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!","About",() => "RemembrAll!",);
     ModConfigMenu.AddSpace("RemembrAll!", "About");
-    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.9.5`);
+    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.9.6`);
 
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!", "About", () => "Mod made by Tidloas with love");
@@ -108,7 +108,7 @@ export function ModConfig(configRA) {
     addItem("Tainted", "Rooms", "Tainted", "Enable Tainted Room detection");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "Added an option to change the layout to vertical, as before.");
-
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "the problems with other mods like Rep+");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "should be solved..");
   }
 }
