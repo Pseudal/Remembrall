@@ -1,8 +1,10 @@
 import { ModCallback } from "isaac-typescript-definitions";
+import { printConsole } from "isaacscript-common";
 import * as json from "json";
 import { SetAnimName } from "./Script/AnimElseIf";
 import { configRA } from "./Script/Config";
 import { ModConfig } from "./Script/MCM";
+
 let RoomArray = [];
 let fortuneSpawned = 0;
 let Icon = Sprite();
@@ -47,13 +49,7 @@ function DisplayIcon() {
             ThisRoom.Room.Data.Subtype == 10))
       ) {
         if (
-          ((ThisRoom.Type !== 7 &&
-            ThisRoom.Type !== 8 &&
-            ThisRoom.Type !== 29 &&
-            ThisRoom.Room.DisplayFlags !== 5) ||
-            ((ThisRoom.Type == 7 ||
-              (ThisRoom.Type == 8 && ThisRoom.Type !== 29)) &&
-              ThisRoom.Room.DisplayFlags !== 3)) &&
+          (ThisRoom.Room.DisplayFlags !== 5 && ThisRoom.Room.DisplayFlags !== 7 && ThisRoom.Room.DisplayFlags !== 3) &&
           configRA.spoil == 1 &&
           ThisRoom.Type !== 1
         ) {
@@ -143,15 +139,54 @@ function CheckTrapdoor() {
           if (element.GetSaveState().Type == 17 && fortuneSpawned == 0) {
             let knife = 0;
 
-            if (
-              (Isaac.GetPlayer().HasCollectible(626) == false &&
-                Game().GetLevel().GetStage() == 2 &&
-                Game().GetLevel().GetStageType() == 4) ||
-              (Isaac.GetPlayer().HasCollectible(627) == false &&
-                Game().GetLevel().GetStage() == 4 &&
-                Game().GetLevel().GetStageType() == 4)
-            ) {
-              knife = 1;
+            // if
+            // (
+            //   (
+            //     Isaac.GetPlayer().HasCollectible(626) == false &&
+            //     (
+            //       (Game().GetLevel().GetStage() == 2 &&
+            //       (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+            //       ||
+            //       ((Game().GetLevel().GetStage() == 1 && Game().GetLevel().GetCurses () == 2) &&
+            //       (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+            //     )
+            //   )
+            //   ||
+            //   (
+            //     Isaac.GetPlayer().HasCollectible(627) == false &&
+            //     (
+            //       (Game().GetLevel().GetStage() == 4 &&
+            //       (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+            //       ||
+            //       ((Game().GetLevel().GetStage() == 3 && Game().GetLevel().GetCurses () == 2) &&
+            //       (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+            //     )
+            //   )
+            // )
+            // {
+            //   knife = 1;
+            // }
+            if(
+                (Game().GetLevel().GetStage() == 2 &&
+                (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+                ||
+                ((Game().GetLevel().GetStage() == 1 && Game().GetLevel().GetCurses () == 2) &&
+                (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+              ){
+                if(Isaac.GetPlayer().HasCollectible(626) == false){
+                  knife = 1;
+                }
+              }
+            if(
+                (Game().GetLevel().GetStage() == 4 &&
+                (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+                ||
+                ((Game().GetLevel().GetStage() == 3 && Game().GetLevel().GetCurses () == 2) &&
+                (Game().GetLevel().GetStageType() == 4) || (Game().GetLevel().GetStageType() == 5))
+              ){
+              if(Isaac.GetPlayer().HasCollectible(627) == false){
+                knife = 1;
+              }
             }
 
             if (configRA.spoil == 2) {
@@ -340,16 +375,27 @@ function main() {
   //   for (let index = 0; index < GetRooms.Size; index++) {
   //     const Room = GetRooms.Get(index);
   //     if (Room.Data.Type !== 1) {
-  //       printConsole(
-  //         `${Room.Data.Type} ${Room.Data.Subtype} ${Room.Data.Variant}`,
-  //       );
+         // printConsole(
+       //   `${Room.Data.Type} ${Room.Data.Subtype} ${Room.DisplayFlags} ${Room.Data.Variant} `,
+        // );
+  //       printConsole(`${Game().GetLevel().GetCurses()}`)
+  //     }
+  //     if (Isaac.GetPlayer().HasCollectible(626) == false) {
+  // printConsole(
+       //   `${Room.Data.Type} ${Room.Data.Subtype} ${Room.DisplayFlags} ${Room.Data.Variant} `,
+       // );
+  //       printConsole(`true`)
   //     }
   //   }
-  //   printConsole(
-  //     `${Game().GetLevel().GetCurrentRoomDesc().Data.Type} ${
-  //       Game().GetLevel().GetCurrentRoomDesc().Data.Subtype
-  //     }`,
-  //   );
+     // printConsole(
+    //   `${Game().GetLevel().GetCurrentRoomDesc().Data.Type} ${
+     //     Game().GetLevel().GetCurrentRoomDesc().Data.Subtype
+   //   }`,
+     // );
   // });
-  // Print a message to the "log.txt" file.
+  // mod.AddCallback(ModCallback.POST_NEW_ROOM, () => {
+   //   let thisRoom = Game().GetLevel().GetCurrentRoomDesc()
+   //   printConsole(`${thisRoom.DisplayFlags}`)
+   //   });
+ // Print a message to the "log.txt" file.
 }

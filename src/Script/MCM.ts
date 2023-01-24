@@ -5,7 +5,7 @@ export function ModConfig(configRA) {
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!","About",() => "RemembrAll!",);
     ModConfigMenu.AddSpace("RemembrAll!", "About");
-    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.9.6`);
+    ModConfigMenu.AddText("RemembrAll!", "About", () => `Version 0.10`);
 
     ModConfigMenu.AddSpace("RemembrAll!", "About");
     ModConfigMenu.AddText("RemembrAll!", "About", () => "Mod made by Tidloas with love");
@@ -100,15 +100,20 @@ export function ModConfig(configRA) {
     addItem("Curse", "Rooms", "Curse", "Enable Curse Room detection");
     addItem("Ambush", "Rooms", "Ambush", "Enable Ambush Room detection");
     addItem("Library", "Rooms", "Library", "Enable Library Room detection");
+    addItem("Isaac", "Rooms", "Isaac", "Enable Isaac Room detection");
+    addItem("Barren", "Rooms", "Barren", "Enable Barren Room detection");
     addItem("Chests", "Rooms", "Chests", "Enable Chests Room detection");
     addItem("Dice", "Rooms", "Dice", "Enable Dice Room detection");
     addItem("Planetarium", "Rooms", "Planetarium", "Enable Planetarium Room detection");
     addItem("Sacrifice", "Rooms", "Sacrifice", "Enable Sacrifice Room detection");
     addItem("Ultra", "Rooms", "UltraSecret", "Enable UltraSecret Room detection");
     addItem("Tainted", "Rooms", "Tainted", "Enable Tainted Room detection");
+    addItem("Heaven", "Rooms", "Heaven", "Enable Heaven's call Room detection");
 
     ModConfigMenu.AddSpace("RemembrAll!", "ChangeLog");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "the problems with other mods like Rep+");
-    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "should be solved..");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "+ Fixed tainted treasure mod compatibility");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "+ Added Isaac + Barren Room");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "+ Fixed XL stage for knife part");
+    ModConfigMenu.AddText("RemembrAll!", "ChangeLog", () => "+ Heaven call compatibility (v1)");
   }
 }

@@ -1,5 +1,6 @@
 import { printConsole } from "isaacscript-common";
 declare const TaintedTreasure: unknown | undefined;
+declare const HeavensCall: unknown | undefined;
 export function SetAnimName(Type, Variant, Subtype, config){
   //printConsole(`${Type}`)
   if(Type == 2){
@@ -76,6 +77,18 @@ export function SetAnimName(Type, Variant, Subtype, config){
   else if(Type == 16){//needIcon
     return("IconLadder")
   }
+  else if(Type == 18){
+    if(config.Isaac == false){
+      return(0)
+    }
+    return("IconIsaacsRoom")
+  }
+  else if(Type == 19){
+    if(config.Barren == false){
+      return(0)
+    }
+    return("IconBarrenRoom")
+  }
   else if(Type == 20){
     if(config.Chest == false){
       return(0)
@@ -83,11 +96,19 @@ export function SetAnimName(Type, Variant, Subtype, config){
     return("IconChestRoom")
   }
   if(TaintedTreasure !== undefined){
-    if(Type == 21 && ( Variant > 12000 && Variant < TaintedTreasure.maxvariant)){
+    if(Type == 21 && ( Variant >= 12000 && Variant <= 12050)){
       if(config.Tainted == false){
         return(0)
       }
       return("Tainted")
+    }
+  }
+  if(HeavensCall !== undefined){
+    if(Type == 21 && ( Variant >= 8500 && Variant <= 8508)){
+      if(config.Heaven == false){
+        return(0)
+      }
+      return("Astral")
     }
   }
   if(Type == 21){
